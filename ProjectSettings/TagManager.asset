@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Event
   - Event2
+  - Event3
   layers:
   - Default
   - TransparentFX

@@ -1,36 +1,40 @@
-using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance;
+    public Animator PlayerAnim;
     public float movementSpeed = 2f; // Adjust this to control movement speed
-
-     public bool isMoving = true;
+    private bool isMoving = false;
 
     private void Awake()
     {
         Instance = this;
     }
 
-    void Update()
-    {    
+    private void Update()
+    {
         if (isMoving)
         {
-            MoveForward(); 
-        }else StopMove();
-        
+            MoveForward();
+            PlayerAnim.Play("PlayerWalk");
+        }
     }
 
-    void MoveForward()
+    private void MoveForward()
     {
         // Move the player forward along the X axis based on the movementSpeed
         transform.Translate(Vector2.right * movementSpeed * Time.deltaTime);
     }
 
-    void StopMove()
+    public void StartMoving()
+    {
+        isMoving = true;
+    }
+
+    public void StopMoving()
     {
         isMoving = false;
+        PlayerAnim.Play("Idle");
     }
-    
 }
