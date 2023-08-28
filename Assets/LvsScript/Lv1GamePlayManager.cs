@@ -12,9 +12,25 @@ public class Lv1GamePlayManager : MonoBehaviour
    
     public GameObject decisionButton;
     public Animator PlayerAnim;
-    public bool event3Reach;
-
     
+    public bool event3Reach;
+    public bool finishLevel1;
+    public Button toNextLevel;
+    public static Lv1GamePlayManager Instance;
+
+    private void Awake()
+    {
+        
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject); 
+               
+            }
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -34,12 +50,15 @@ public class Lv1GamePlayManager : MonoBehaviour
                 PlayerAnim.Play("Idle");
                 
                  decisionButton.SetActive(true);
-                
-               
-                
                 break;
 
-            // Add more cases for different scenarios if needed
+            case "Event2":
+                
+                PlayerController.Instance.StopMoving();
+                PlayerAnim.Play("Idle");
+                finishLevel1 = true;
+                //unlock lv 2 
+                break;
 
             default:
                
