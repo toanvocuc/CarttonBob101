@@ -3,7 +3,8 @@ using System;
 using System.Collections;
 using Cinemachine;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 
 public class Lv1GamePlayManager : MonoBehaviour
 {
@@ -14,9 +15,10 @@ public class Lv1GamePlayManager : MonoBehaviour
     public Animator PlayerAnim;
     
     public bool event3Reach;
-    public bool finishLevel1;
+    
     public Button toNextLevel;
     public static Lv1GamePlayManager Instance;
+    public float progress = 2;
 
     private void Awake()
     {
@@ -30,6 +32,7 @@ public class Lv1GamePlayManager : MonoBehaviour
                 Destroy(gameObject); 
                
             }
+            ProgresBar.Instance.SetMaxValue(progress);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -42,6 +45,7 @@ public class Lv1GamePlayManager : MonoBehaviour
                 PlayerController.Instance.StopMoving();
                 StartCoroutine(DelayCoroutine1Second());
                 StartCoroutine(DelayCoroutine3Second());
+                ProgresBar.Instance.ChangeValue();
                 break;
 
             case "Event3":
@@ -56,7 +60,7 @@ public class Lv1GamePlayManager : MonoBehaviour
                 
                 PlayerController.Instance.StopMoving();
                 PlayerAnim.Play("Idle");
-                finishLevel1 = true;
+                toNextLevel.gameObject.SetActive(true);
                 //unlock lv 2 
                 break;
 
@@ -74,6 +78,7 @@ public class Lv1GamePlayManager : MonoBehaviour
             PlayerAnim.Play("HappyJump");
             StartCoroutine(DelayCoroutine2Second());
             decisionButton.SetActive(false);
+            ProgresBar.Instance.ChangeValue();
            
         }
     }
@@ -92,7 +97,7 @@ public class Lv1GamePlayManager : MonoBehaviour
     void Update()
     {
         if (event3Reach)
-        {
+        {    
             HandleRightClick();
             HandleWrongClick();
         }

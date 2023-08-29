@@ -11,18 +11,19 @@ public class ToNextLevel : MonoBehaviour
 
    void Start()
    {
-      nextSceneLoad = SceneManager.GetActiveScene().buildIndex + 1;
+      nextSceneLoad = SceneManager.GetActiveScene().buildIndex + 2;
    }
 
    public void OnclickNextLevel()
    {
       //Move to next level
-      SceneManager.LoadScene(nextSceneLoad);
-
+      SceneManager.LoadScene(nextSceneLoad-1);
+     
       //Setting Int for Index
-      if (nextSceneLoad > PlayerPrefs.GetInt("levelAt"))
+      if (nextSceneLoad >= PlayerPrefs.GetInt("levelAt"))
       {
-         PlayerPrefs.SetInt("levelAt", nextSceneLoad);
+         PlayerPrefs.SetInt("levelAt", nextSceneLoad );
+         Debug.Log(PlayerPrefs.GetInt("levelAt", nextSceneLoad));
       }
    }
    
