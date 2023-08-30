@@ -1,8 +1,9 @@
+using LvsScript;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace LvsScript
+namespace AllScript.LvsScript
 {
     public class LevelManager : MonoBehaviour
     {

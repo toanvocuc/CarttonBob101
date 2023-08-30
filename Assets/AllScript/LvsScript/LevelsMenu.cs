@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace LvsScript
+namespace AllScript.LvsScript
 {
     public class LevelsMenu : MonoBehaviour
     {
